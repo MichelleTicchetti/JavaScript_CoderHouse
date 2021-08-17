@@ -1,0 +1,33 @@
+.formulario-p {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.formulario-b {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.btn-formulario {
+  width: 100%;
+  font-size: 30px;
+  cursor: pointer;
+  border: 2px;
+  border-radius: 5px;
+  background-color: #f2a154;
+}
+
+.footer {
+  background-color: #314e52ab;
+  height: 20vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer h2 {
+  font-family: "Poller One", cursive;
+  font-size: 15px;
+  text-align: center;
+  color: #e7e6e1;
+}
