@@ -1,3 +1,22 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+.header {
+  background-color: #314e52ab;
+  height: 20vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header h1 {
+  font-family: "Poller One", cursive;
+  text-align: center;
+  color: #e7e6e1;
+}
+
 .formulario-p {
   margin-top: 10px;
   margin-bottom: 10px;
