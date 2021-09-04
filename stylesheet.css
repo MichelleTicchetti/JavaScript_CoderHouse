@@ -4,7 +4,7 @@
 }
 
 .header {
-  background-color: #314e52ab;
+  background-color: #5e6b6dab;
   height: 20vh;
   display: flex;
   align-items: center;
@@ -17,12 +17,38 @@
   color: #e7e6e1;
 }
 
+.main-div {
+  margin: 0px;
+}
+
+.formulario-metadata {
+  padding: 10px;
+  background-color: #f2a154;
+}
+
+.formulario-metadata label {
+  margin-top: 10px;
+}
+
+.formulario-metadata input {
+  margin-bottom: 10px;
+}
+
 .formulario-p {
+  padding: 10px;
   margin-top: 10px;
   margin-bottom: 10px;
 }
 
-.formulario-b {
+.formulario-p label {
+  margin-top: 10px;
+}
+
+.formulario-p input {
+  margin-bottom: 10px;
+}
+
+.formulario-btn {
   margin-top: 20px;
   margin-bottom: 20px;
 }
@@ -34,6 +60,23 @@
   border: 2px;
   border-radius: 5px;
   background-color: #f2a154;
+}
+
+.history h2 {
+  font-size: 30px;
+  text-align: center;
+  padding: 10px;
+  background-color: #e7e6e1;
+}
+
+#listaPacientesFecha ul {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+}
+
+#listaPacientesFecha li {
+  list-style: url("https://img.icons8.com/ios/20/000000/ophthalmology.png");
 }
 
 .footer {

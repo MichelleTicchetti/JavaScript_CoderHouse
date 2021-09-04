@@ -1,4 +1,6 @@
-//Valores Tipo de Consulta
+const CONTINUE = "SI";
+
+//Valores Tipo de Consu5lta
 const CONS_PART = 1500;
 const CONS_PREPA = 300;
 const CONS_OBRASOC = 250;
@@ -30,58 +32,89 @@ const CIR_BLEFA = 10000;
 const CIR_PTOSIS = 10000;
 
 
-/*Declaracion de variables para guardar el resultado del select
-let consulta = document.getElementById("consulta").value;
-let estudio = document.getElementById("estudio").value;
-let cirugia = document.getElementById("cirugia").value;*/
-
-let consulta, estudio, cirugia;
-let p1=0, p2=0, p3=0, total;
-let idPaciente, nombrePac, apellidoPac, telefonoPac, emailPac;
-const arrayPacientes = [];
+let consulta;
+let estudio;
+let cirugia;
+let p1=0;
+let p2=0;
+let p3=0;
+let totalConsulta;
+let totalRecaudacion = 0;
+let idPaciente;
+let nombrePac;
+let apellidoPac;
+let telefonoPac;
+let emailPac;
+let arrayPacientes =[];
+let arrayConsultas = [];
 
 class Paciente{
 
-  //constructor 
   constructor(id, nombre, apellido, telefono, email){
     this.id = id;
     this.nombre = nombre;
-    this.apellido = apellido;
+    this.apellido = apellido.toUpperCase();
     this.telefono = telefono;
     this.email = email;
-  }
-  
-  //aplico los siguientes métodos únicamente para cumplir con el enunciado de la entrega pero no formará parte del proyecto final
-  saludar(){
-    console.log("Hola, soy "+this.nombre+" "+this.apellido+". Mi ID de paciente es: "+this.id+". Mi teléfono es "+this.telefono+". Mi email es "+this.email);
   }
     
 }
 
-//esto se va a eliminar cuando pueda traer los datos desde el input del form
+class ConsultaPaciente{
+
+  constructor(paciente, consulta, estudio, cirugia, totalConsulta){
+    this.paciente = paciente
+    this.consulta = consulta
+    this.estudio = estudio
+    this.cirugia = cirugia
+    this.totalConsulta = totalConsulta;
+  }
+
+}
+
+
 let ingresarPaciente = prompt("¿Desea ingresar paciente? [SI/NO].");
 
-while(ingresarPaciente=="SI"){
+let msjInput = "Ingrese el ";
+let dato = "";
 
-idPaciente = prompt("Ingrese el ID del paciente");
-nombrePac = prompt("Ingrese el nombre del paciente");
-apellidoPac = prompt("Ingrese el apellido del paciente");
-telefonoPac = prompt("Ingrese el teléfono del paciente");
-emailPac = prompt("Ingrese el email del paciente");
+function ingresarDatoStringObligatorio(dato) {
+  let cadena = prompt(msjInput + dato)
+
+  while(cadena===""){
+    alert("Debe inserir un dato.")
+    cadena = prompt(msjInput + dato);
+  }
+
+  return cadena;
+}
+
+function ingresarDatoString(dato) {
+  let cadena = prompt(msjInput + dato);
+  return cadena;
+}
+
+while(ingresarPaciente.toUpperCase()===CONTINUE){  
+idPaciente = ingresarDatoStringObligatorio("ID del paciente");
+nombrePac = ingresarDatoStringObligatorio("nombre del paciente");
+apellidoPac = ingresarDatoStringObligatorio("apellido del Paciente");
+telefonoPac = ingresarDatoString("teléfono del paciente");
+emailPac = ingresarDatoString("email del paciente");
   
-const paciente= new Paciente(idPaciente, nombrePac, apellidoPac, telefonoPac, emailPac);
+let paciente= new Paciente(idPaciente, nombrePac, apellidoPac, telefonoPac, emailPac)
+arrayPacientes.push(paciente)
 
-//esto se va a eliminar cuando pueda traer los datos desde el select del form
-consulta = prompt("Ingrese tipo de consulta");
-switch(consulta){
+consulta= prompt("Ingrese tipo de consulta")
 
-  case "Particular":
+switch(consulta.toUpperCase()){
+
+  case "PARTICULAR":
     p1= CONS_PART;
     break;
-  case "Prepaga":
+  case "PREPAGA":
     p1= CONS_PREPA;
     break;
-  case "Obra Social":
+  case "OBRA SOCIAL":
     p1= CONS_OBRASOC;
     break;
   case "PAMI":
@@ -91,98 +124,96 @@ switch(consulta){
     p1= CONS_PLANSALUD;
 }
 
-//esto se va a eliminar cuando pueda traer los datos desde el select del form
 estudio = prompt("Ingrese estudio realizado");
 if(estudio != "--"){
 
-   switch(estudio){
+   switch(estudio.toUpperCase()){
 
-    case "Campo Visual Computarizado":
+    case "CAMPO VISUAL COMPUTARIZADO":
     p2= EST_CAMPOVIS;
     break;
 
-    case "Interferometría (Test de Lotmar, PAM)":
+    case "INTERFEROMETRIA":
     p2= EST_INTERFER;
     break;
 
-    case "Capsulotomía con Yag":
+    case "CAPSULOTOMÍA CON YAG":
     p2= EST_CAPSULYAG;
     break;
 
-    case "Ecometría":
+    case "ECOMETRÍA":
     p2= EST_ECOMET;
     break;
 
-    case "Ecografía":
+    case "ECOGRAFÍA":
     p2= EST_ECO;
     break;
 
-    case "Láser. crío, diatermia de baja complejidad":
+    case "LÁSER":
     p2= EST_LASER;
     break;
 
-    case "Fuera de Cápita - Paquimetría":
+    case "PAQUIMETRÍA":
     p2= EST_PAQUIM;
     break;
 
-    case "Fuera de Cápita - OCT":
+    case "OCT":
     p2= EST_OCT;
     break;
 
-    case "Fuera de Cápita - Tomografía confocal del nervio óptico":
+    case "TOMOGRAFÍA CONFOCAL DEL NERVIO ÓPTICO":
     p2= EST_TOMONERVOPT;
     break;
 
-    case "Fuera de Cápita - Tomografía corneal":
+    case "TOMOGRAFÍA CORNEAL":
     p2= EST_TOMOCORN;
     break;
 
-    case "Fuera de Cápita - UBM":
+    case "UBM":
     p2= EST_UBM;
     break;     
   }
 
 }
 
-//esto se va a eliminar cuando pueda traer los datos desde el select del form
 cirugia = prompt("Ingrese cirugía realizada");
 if(cirugia != "--"){
    
-  switch(cirugia){
+  switch(cirugia.toUpperCase()){
 
-    case "Vitrectomía":
+    case "VITRECTOMÍA":
       p3= CIR_VITRE;
       break;
 
-    case "FacoVitrectomía":
+    case "FACOVITRECTOMÍA":
       p3= CIR_FACOVITRE;
       break;
   
-    case "Facoemulsificación":
+    case "FACOEMULSIFICACIÓN":
       p3= CIR_CATA;
       break;
   
-    case "Membrana epiretinal":
+    case "MEMBRANA EPIRETINAL":
       p3= CIR_MER;
       break
 
-    case "Refractiva":
+    case "REFRACTIVA":
       p3= CIR_REFRA;
       break;
 
-    case "Trabeculectomia":
+    case "TRABECULECTOMÍA":
       p3= CIR_TRABE;
       break
 
-    case "Aplicación Intravítrea de Antiangiogénicos":
+    case "ANTIANGIOGÉNICOS":
       p3=CIR_AAG;
       break
 
-    case "Blefaroplastia":
+    case "BLEFAROPLASTIA":
       p3= CIR_BLEFA;
       break
 
-    case "Ptosis palpebral":
+    case "PTOSIS PALPEBRAL":
       p3= CIR_PTOSIS;
       break
     
@@ -190,25 +221,52 @@ if(cirugia != "--"){
 
 }
 
-total= sumar(p1,p2,p3);
-
-
-
 function sumar(num1, num2, num3){
 return num1+num2+num3
 }
 
-
 function mostrarConsulta(){
-  console.log("ID Paciente: "+idPaciente+"; Consulta: "+consulta+"; Estudio: "+estudio+"; Cirugía: "+cirugia)
+  console.log(`ID Paciente: ${idPaciente} - Paciente: ${nombrePac} ${apellidoPac} - Consulta: ${consulta} ${estudio} ${cirugia}`)
 }
 
-arrayPacientes.push(paciente);
-paciente.saludar();
-mostrarConsulta();
-console.log("Total de mi consulta: $"+total);
+totalConsulta= sumar(p1,p2,p3)
+totalRecaudacion += totalConsulta
+mostrarConsulta()
 
-ingresarPaciente = prompt("¿Desea ingresar paciente? [SI/NO].");
+
+console.log("Total de mi consulta: $"+totalConsulta)
+
+let consultaXPaciente = new ConsultaPaciente(paciente, consulta, estudio, cirugia, totalConsulta)
+arrayConsultas.push(consultaXPaciente)
+
+ingresarPaciente = prompt("¿Desea ingresar paciente? [SI/NO].")
 }
 
-console.log(arrayPacientes);
+console.log(arrayPacientes)
+
+let listaPacientesFecha = document.getElementById('listaPacientesFecha')
+
+
+const mostrarConsultas = (arrayConsultas) => {
+
+  for(let i = 0; i < arrayConsultas.length; i++){
+    let itemConsulta = document.createElement('li')
+    itemConsulta.textContent=`Paciente: ${arrayConsultas[i].paciente.apellido}, ${arrayConsultas[i].paciente.nombre}. Descripción: ${arrayConsultas[i].consulta} ${arrayConsultas[i].estudio}  ${arrayConsultas[i].cirugia}. TOTAL: $ ${arrayConsultas[i].totalConsulta}`
+    listaPacientesFecha.appendChild(itemConsulta)
+  }
+}
+
+let totalDia = document.getElementById('recaudacionTotal')
+
+const mostrarTotalRecaudacion = (totalRecaudacion) =>{
+  let mostrarRecaudacion = document.createElement('h2')
+  mostrarRecaudacion.textContent=`Total recaudado: $${totalRecaudacion}`
+  totalDia.appendChild(mostrarRecaudacion)
+
+}
+
+mostrarConsultas(arrayConsultas)
+mostrarTotalRecaudacion(totalRecaudacion)
+
+
+ 
