@@ -1,5 +1,3 @@
-const CONTINUE = "SI";
-
 //Valores Tipo de Consu5lta
 const CONS_PART = 1500;
 const CONS_PREPA = 300;
@@ -13,17 +11,17 @@ const EST_INTERFER = 800;
 const EST_CAPSULYAG = 2500;
 const EST_ECOMET = 1500;
 const EST_ECO = 2500;
-const EST_LASER= 3000;
-const EST_PAQUIM= 1500;
-const EST_OCT= 2500;
-const EST_TOMONERVOPT= 2000;
-const EST_TOMOCORN= 2000;
-const EST_UBM= 1500;
+const EST_LASER = 3000;
+const EST_PAQUIM = 1500;
+const EST_OCT = 2500;
+const EST_TOMONERVOPT = 2000;
+const EST_TOMOCORN = 2000;
+const EST_UBM = 1500;
 
 //Valores Cirugias
-const CIR_CATA = 5000;
 const CIR_MER = 1000;
 const CIR_VITRE = 7000;
+const CIR_FACOEMU = 5000;
 const CIR_FACOVITRE = 10000;
 const CIR_REFRA = 15000;
 const CIR_TRABE = 6000;
@@ -31,242 +29,280 @@ const CIR_AAG = 5000;
 const CIR_BLEFA = 10000;
 const CIR_PTOSIS = 10000;
 
+class Fecha {
+  constructor(fecha) {
+    this.fecha = fecha;
+  }
+}
 
-let consulta;
-let estudio;
-let cirugia;
-let p1=0;
-let p2=0;
-let p3=0;
-let totalConsulta;
-let totalRecaudacion = 0;
-let idPaciente;
-let nombrePac;
-let apellidoPac;
-let telefonoPac;
-let emailPac;
-let arrayPacientes =[];
-let arrayConsultas = [];
+class Medico {
+  constructor(id, nombre) {
+    this.id = id;
+    this.nombre = nombre.toUpperCase();
+  }
+}
 
-class Paciente{
-
-  constructor(id, nombre, apellido, telefono, email){
+class Paciente {
+  constructor(id, nombre, apellido, telefono, email) {
     this.id = id;
     this.nombre = nombre;
     this.apellido = apellido.toUpperCase();
     this.telefono = telefono;
     this.email = email;
   }
-    
 }
 
-class ConsultaPaciente{
-
-  constructor(paciente, consulta, estudio, cirugia, totalConsulta){
-    this.paciente = paciente
-    this.consulta = consulta
-    this.estudio = estudio
-    this.cirugia = cirugia
+class Consulta {
+  constructor(consulta, estudio, cirugia, totalConsulta) {
+    this.consulta = consulta;
+    this.estudio = estudio;
+    this.cirugia = cirugia;
     this.totalConsulta = totalConsulta;
   }
-
 }
 
+let arrayConsultas = JSON.parse(localStorage.getItem("consultas"));
 
-let ingresarPaciente = prompt("¿Desea ingresar paciente? [SI/NO].");
+if (!arrayConsultas) {
+  arrayConsultas = [];
+}
 
-let msjInput = "Ingrese el ";
-let dato = "";
+let arrayPacientes = JSON.parse(localStorage.getItem("pacientes"));
 
-function ingresarDatoStringObligatorio(dato) {
-  let cadena = prompt(msjInput + dato)
+if (!arrayPacientes) {
+  arrayPacientes = [];
+}
 
-  while(cadena===""){
-    alert("Debe inserir un dato.")
-    cadena = prompt(msjInput + dato);
+let arrayMedicos = JSON.parse(localStorage.getItem("medicos"));
+
+if (!arrayMedicos) {
+  arrayMedicos = [];
+}
+
+const form = document.getElementById("form");
+const recTot = document.getElementById("recaudacionTotal");
+const fechaHoy = document.getElementById("fecha");
+const idDr = document.getElementById("idMedico");
+const nombreDr = document.getElementById("nombreMedico");
+const inputIdPaciente = document.getElementById("idPaciente");
+const inputNombrePaciente = document.getElementById("nombrePaciente");
+const inputApellidoPaciente = document.getElementById("apellidoPaciente");
+const inputTelefonoPaciente = document.getElementById("telPaciente");
+const inputEmailPaciente = document.getElementById("emailPaciente");
+
+function getSelectedConsulta() {
+  let selectedValue = document.getElementById("consulta").value;
+  return selectedValue;
+}
+
+function getSelectedEstudio() {
+  let selectedValue = document.getElementById("estudio").value;
+  return selectedValue;
+}
+
+function getSelectedCirugia() {
+  let selectedValue = document.getElementById("cirugia").value;
+  return selectedValue;
+}
+
+function calcularConsulta(consulta) {
+  let precioConsulta = 0;
+
+  switch (consulta) {
+    case "null":
+      precioConsulta = 0;
+      break;
+    case "Particular":
+      precioConsulta = CONS_PART;
+      break;
+    case "Prepaga":
+      precioConsulta = CONS_PREPA;
+      break;
+    case "Obra Social":
+      precioConsulta = CONS_OBRASOC;
+      break;
+    case "PAMI":
+      precioConsulta = CONS_PAMI;
+      break;
+    default:
+      precioConsulta = CONS_PLANSALUD;
   }
 
-  return cadena;
+  return precioConsulta;
 }
 
-function ingresarDatoString(dato) {
-  let cadena = prompt(msjInput + dato);
-  return cadena;
-}
+function calcularEstudio(estudio) {
+  let precioEstudio = 0;
 
-while(ingresarPaciente.toUpperCase()===CONTINUE){  
-idPaciente = ingresarDatoStringObligatorio("ID del paciente");
-nombrePac = ingresarDatoStringObligatorio("nombre del paciente");
-apellidoPac = ingresarDatoStringObligatorio("apellido del Paciente");
-telefonoPac = ingresarDatoString("teléfono del paciente");
-emailPac = ingresarDatoString("email del paciente");
-  
-let paciente= new Paciente(idPaciente, nombrePac, apellidoPac, telefonoPac, emailPac)
-arrayPacientes.push(paciente)
+  switch (estudio) {
+    case "null":
+      precioEstudio = 0;
+      break;
 
-consulta= prompt("Ingrese tipo de consulta")
+    case "Campo Visual Computarizado":
+      precioEstudio = EST_CAMPOVIS;
+      break;
 
-switch(consulta.toUpperCase()){
+    case "Interferometria":
+      precioEstudio = EST_INTERFER;
+      break;
 
-  case "PARTICULAR":
-    p1= CONS_PART;
-    break;
-  case "PREPAGA":
-    p1= CONS_PREPA;
-    break;
-  case "OBRA SOCIAL":
-    p1= CONS_OBRASOC;
-    break;
-  case "PAMI":
-    p1= CONS_PAMI;
-    break;
-  default:
-    p1= CONS_PLANSALUD;
-}
+    case "Capsulotomia con Yag":
+      precioEstudio = EST_CAPSULYAG;
+      break;
 
-estudio = prompt("Ingrese estudio realizado");
-if(estudio != "--"){
+    case "Ecometria":
+      precioEstudio = EST_ECOMET;
+      break;
 
-   switch(estudio.toUpperCase()){
+    case "Ecografia":
+      precioEstudio = EST_ECO;
+      break;
 
-    case "CAMPO VISUAL COMPUTARIZADO":
-    p2= EST_CAMPOVIS;
-    break;
+    case "Laser":
+      precioEstudio = EST_LASER;
+      break;
 
-    case "INTERFEROMETRIA":
-    p2= EST_INTERFER;
-    break;
-
-    case "CAPSULOTOMÍA CON YAG":
-    p2= EST_CAPSULYAG;
-    break;
-
-    case "ECOMETRÍA":
-    p2= EST_ECOMET;
-    break;
-
-    case "ECOGRAFÍA":
-    p2= EST_ECO;
-    break;
-
-    case "LÁSER":
-    p2= EST_LASER;
-    break;
-
-    case "PAQUIMETRÍA":
-    p2= EST_PAQUIM;
-    break;
+    case "Paquimetria":
+      precioEstudio = EST_PAQUIM;
+      break;
 
     case "OCT":
-    p2= EST_OCT;
-    break;
+      precioEstudio = EST_OCT;
+      break;
 
-    case "TOMOGRAFÍA CONFOCAL DEL NERVIO ÓPTICO":
-    p2= EST_TOMONERVOPT;
-    break;
+    case "Tomografia Nervio Optico":
+      precioEstudio = EST_TOMONERVOPT;
+      break;
 
-    case "TOMOGRAFÍA CORNEAL":
-    p2= EST_TOMOCORN;
-    break;
+    case "Tomografia Corneal":
+      precioEstudio = EST_TOMOCORN;
+      break;
 
     case "UBM":
-    p2= EST_UBM;
-    break;     
+      precioEstudio = EST_UBM;
+      break;
   }
 
+  return precioEstudio;
 }
 
-cirugia = prompt("Ingrese cirugía realizada");
-if(cirugia != "--"){
-   
-  switch(cirugia.toUpperCase()){
+function calcularCirugia(cirugia) {
+  let precioCirugia = 0;
 
-    case "VITRECTOMÍA":
-      p3= CIR_VITRE;
+  switch (cirugia) {
+    case "null":
+      precioCirugia = 0;
       break;
 
-    case "FACOVITRECTOMÍA":
-      p3= CIR_FACOVITRE;
-      break;
-  
-    case "FACOEMULSIFICACIÓN":
-      p3= CIR_CATA;
-      break;
-  
-    case "MEMBRANA EPIRETINAL":
-      p3= CIR_MER;
-      break
-
-    case "REFRACTIVA":
-      p3= CIR_REFRA;
+    case "Refractiva":
+      precioCirugia = CIR_REFRA;
       break;
 
-    case "TRABECULECTOMÍA":
-      p3= CIR_TRABE;
-      break
+    case "Facoemulsificacion":
+      precioCirugia = CIR_FACOEMU;
+      break;
 
-    case "ANTIANGIOGÉNICOS":
-      p3=CIR_AAG;
-      break
+    case "Vitrectomia":
+      precioCirugia = CIR_VITRE;
+      break;
 
-    case "BLEFAROPLASTIA":
-      p3= CIR_BLEFA;
-      break
+    case "Trabeculotomia":
+      precioCirugia = CIR_TRABE;
+      break;
 
-    case "PTOSIS PALPEBRAL":
-      p3= CIR_PTOSIS;
-      break
-    
-}
+    case "AAG":
+      precioCirugia = CIR_AAG;
+      break;
 
-}
+    case "MER":
+      precioCirugia = CIR_MER;
+      break;
 
-function sumar(num1, num2, num3){
-return num1+num2+num3
-}
+    case "Blefaroplastia":
+      precioCirugia = CIR_BLEFA;
+      break;
 
-function mostrarConsulta(){
-  console.log(`ID Paciente: ${idPaciente} - Paciente: ${nombrePac} ${apellidoPac} - Consulta: ${consulta} ${estudio} ${cirugia}`)
-}
+    case "Ptosis Palpebral":
+      precioCirugia = CIR_PTOSIS;
+      break;
 
-totalConsulta= sumar(p1,p2,p3)
-totalRecaudacion += totalConsulta
-mostrarConsulta()
-
-
-console.log("Total de mi consulta: $"+totalConsulta)
-
-let consultaXPaciente = new ConsultaPaciente(paciente, consulta, estudio, cirugia, totalConsulta)
-arrayConsultas.push(consultaXPaciente)
-
-ingresarPaciente = prompt("¿Desea ingresar paciente? [SI/NO].")
-}
-
-console.log(arrayPacientes)
-
-let listaPacientesFecha = document.getElementById('listaPacientesFecha')
-
-
-const mostrarConsultas = (arrayConsultas) => {
-
-  for(let i = 0; i < arrayConsultas.length; i++){
-    let itemConsulta = document.createElement('li')
-    itemConsulta.textContent=`Paciente: ${arrayConsultas[i].paciente.apellido}, ${arrayConsultas[i].paciente.nombre}. Descripción: ${arrayConsultas[i].consulta} ${arrayConsultas[i].estudio}  ${arrayConsultas[i].cirugia}. TOTAL: $ ${arrayConsultas[i].totalConsulta}`
-    listaPacientesFecha.appendChild(itemConsulta)
+    case "Facovitrectomia":
+      precioCirugia = CIR_FACOVITRE;
+      break;
   }
+
+  return precioCirugia;
 }
 
-let totalDia = document.getElementById('recaudacionTotal')
-
-const mostrarTotalRecaudacion = (totalRecaudacion) =>{
-  let mostrarRecaudacion = document.createElement('h2')
-  mostrarRecaudacion.textContent=`Total recaudado: $${totalRecaudacion}`
-  totalDia.appendChild(mostrarRecaudacion)
-
+function sumar(num1, num2, num3) {
+  return num1 + num2 + num3;
 }
 
-mostrarConsultas(arrayConsultas)
-mostrarTotalRecaudacion(totalRecaudacion)
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
 
+  const date = fechaHoy.value;
+  const fecha = new Fecha(date);
+  localStorage.setItem("fecha", JSON.stringify(fecha));
 
- 
+  const docId = idDr.value;
+  const docNombre = nombreDr.value;
+  const medico = new Medico(docId, docNombre);
+  localStorage.setItem("medico", JSON.stringify(medico));
+  arrayMedicos.push(medico);
+
+  const id = inputIdPaciente.value;
+  const nombre = inputNombrePaciente.value;
+  const apellido = inputApellidoPaciente.value;
+  const tel = inputTelefonoPaciente.value;
+  const email = inputEmailPaciente.value;
+
+  const paciente = new Paciente(id, nombre, apellido, tel, email);
+  localStorage.setItem("paciente", JSON.stringify(paciente));
+  arrayPacientes.push(paciente);
+
+  const consulta = getSelectedConsulta();
+  let p1 = calcularConsulta(consulta);
+  console.log("Consulta: $" + p1);
+
+  const estudio = getSelectedEstudio();
+  let p2 = calcularEstudio(estudio);
+  console.log("Estudio: $" + p2);
+
+  const cirugia = getSelectedCirugia();
+  let p3 = calcularCirugia(cirugia);
+  console.log("Cirugía: $" + p3);
+
+  let totalConsulta = sumar(p1, p2, p3);
+  console.log("Total Consulta: $" + totalConsulta);
+
+  const consultaXPaciente = new Consulta(
+    consulta,
+    estudio,
+    cirugia,
+    totalConsulta
+  );
+  localStorage.setItem("consulta", JSON.stringify(consultaXPaciente));
+  arrayConsultas.push(consultaXPaciente);
+
+  console.log("Total de mi consulta: $" + totalConsulta);
+
+  console.log(arrayConsultas);
+  console.log(arrayMedicos);
+  console.log(arrayPacientes);
+
+  let listaPacientesFecha = document.getElementById("listaPacientesFecha");
+
+  mostrarConsultas(date, medico, paciente, consultaXPaciente);
+
+  function mostrarConsultas(f, m, p, c) {
+    let itemConsulta = document.createElement("li");
+
+    itemConsulta.textContent = `Fecha: ${f}, Medico: ${m.nombre}. Paciente: ${p.apellido}, ${p.nombre}. Descripción: [Consulta] ${c.consulta}, [Estudio] ${c.estudio}, [Cirugía] ${c.cirugia}. TOTAL: $ ${c.totalConsulta}`;
+
+    listaPacientesFecha.appendChild(itemConsulta);
+  }
+
+  document.getElementById("form").reset();
+});
