@@ -79,29 +79,18 @@ if (!arrayMedicos) {
   arrayMedicos = [];
 }
 
-const form = document.getElementById("form");
-const recTot = document.getElementById("recaudacionTotal");
-const fechaHoy = document.getElementById("fecha");
-const idDr = document.getElementById("idMedico");
-const nombreDr = document.getElementById("nombreMedico");
-const inputIdPaciente = document.getElementById("idPaciente");
-const inputNombrePaciente = document.getElementById("nombrePaciente");
-const inputApellidoPaciente = document.getElementById("apellidoPaciente");
-const inputTelefonoPaciente = document.getElementById("telPaciente");
-const inputEmailPaciente = document.getElementById("emailPaciente");
-
 function getSelectedConsulta() {
-  let selectedValue = document.getElementById("consulta").value;
+  let selectedValue = $("#consulta").val();
   return selectedValue;
 }
 
 function getSelectedEstudio() {
-  let selectedValue = document.getElementById("estudio").value;
+  let selectedValue = $("#estudio").val();
   return selectedValue;
 }
 
 function getSelectedCirugia() {
-  let selectedValue = document.getElementById("cirugia").value;
+  let selectedValue = $("#cirugia").val();
   return selectedValue;
 }
 
@@ -239,24 +228,25 @@ function sumar(num1, num2, num3) {
   return num1 + num2 + num3;
 }
 
-form.addEventListener("submit", (event) => {
+$("#form").submit(function (event) {
   event.preventDefault();
 
-  const date = fechaHoy.value;
+  const date = $("#fecha").val();
   const fecha = new Fecha(date);
   localStorage.setItem("fecha", JSON.stringify(fecha));
 
-  const docId = idDr.value;
-  const docNombre = nombreDr.value;
+  const docId = $("#idMedico").val();
+  const docNombre = $("#nombreMedico").val();
+
   const medico = new Medico(docId, docNombre);
   localStorage.setItem("medico", JSON.stringify(medico));
   arrayMedicos.push(medico);
 
-  const id = inputIdPaciente.value;
-  const nombre = inputNombrePaciente.value;
-  const apellido = inputApellidoPaciente.value;
-  const tel = inputTelefonoPaciente.value;
-  const email = inputEmailPaciente.value;
+  const id = $("#idPaciente").val();
+  const nombre = $("#nombrePaciente").val();
+  const apellido = $("#apellidoPaciente").val();
+  const tel = $("#telPaciente").val();
+  const email = $("#emailPaciente").val();
 
   const paciente = new Paciente(id, nombre, apellido, tel, email);
   localStorage.setItem("paciente", JSON.stringify(paciente));
@@ -283,6 +273,7 @@ form.addEventListener("submit", (event) => {
     cirugia,
     totalConsulta
   );
+
   localStorage.setItem("consulta", JSON.stringify(consultaXPaciente));
   arrayConsultas.push(consultaXPaciente);
 
@@ -292,17 +283,17 @@ form.addEventListener("submit", (event) => {
   console.log(arrayMedicos);
   console.log(arrayPacientes);
 
-  let listaPacientesFecha = document.getElementById("listaPacientesFecha");
+  let listaPacientesFecha = $("#listaPacientesFecha");
 
   mostrarConsultas(date, medico, paciente, consultaXPaciente);
 
-  function mostrarConsultas(f, m, p, c) {
+  function mostrarConsultas(d, m, p, c) {
     let itemConsulta = document.createElement("li");
 
-    itemConsulta.textContent = `Fecha: ${f}, Medico: ${m.nombre}. Paciente: ${p.apellido}, ${p.nombre}. Descripción: [Consulta] ${c.consulta}, [Estudio] ${c.estudio}, [Cirugía] ${c.cirugia}. TOTAL: $ ${c.totalConsulta}`;
+    itemConsulta.textContent = `Fecha: ${d}, Medico: ${m.nombre}. Paciente: ${p.apellido}, ${p.nombre}. Descripción: [Consulta] ${c.consulta}, [Estudio] ${c.estudio}, [Cirugía] ${c.cirugia}. TOTAL: $ ${c.totalConsulta}`;
 
-    listaPacientesFecha.appendChild(itemConsulta);
+    listaPacientesFecha.append(itemConsulta);
   }
 
-  document.getElementById("form").reset();
+  $("#form")[0].reset();
 });
