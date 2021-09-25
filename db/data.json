@@ -1,0 +1,32 @@
+[
+  {
+    "userId": 1,
+    "id": 1,
+    "title": "Consulta Particular",
+    "body": "$1500"
+  },
+  {
+    "userId": 1,
+    "id": 2,
+    "title": "Consulta Prepaga",
+    "body": "$300"
+  },
+  {
+    "userId": 1,
+    "id": 3,
+    "title": "Consulta Obra Social",
+    "body": "$250"
+  },
+  {
+    "userId": 1,
+    "id": 4,
+    "title": "Consulta PAMI",
+    "body": "$500"
+  },
+  {
+    "userId": 1,
+    "id": 5,
+    "title": "Consulta Plan de Salud",
+    "body": "$0"
+  }
+]

@@ -1,4 +1,4 @@
-//Valores Tipo de Consu5lta
+//Valores Tipo de Consulta
 const CONS_PART = 1500;
 const CONS_PREPA = 300;
 const CONS_OBRASOC = 250;
@@ -344,7 +344,7 @@ $("#form").submit(function (event) {
   function mostrarConsultas(d, m, p, c) {
     let itemConsulta = document.createElement("li");
 
-    itemConsulta.textContent = `Fecha: ${d}, Medico: ${m.nombre}. Paciente: ${p.apellido}, ${p.nombre}. Descripción: [Consulta] ${c.consulta}, [Estudio] ${c.estudio}, [Cirugía] ${c.cirugia}. TOTAL: $ ${c.totalConsulta}`;
+    itemConsulta.textContent = `Fecha: ${d}, Medico: [ID]${m.id}, ${m.nombre}. Paciente: ${p.apellido}, ${p.nombre}. Descripción: [Consulta] ${c.consulta}, [Estudio] ${c.estudio}, [Cirugía] ${c.cirugia}. TOTAL: $ ${c.totalConsulta}`;
 
     listaPacientesFecha.append(itemConsulta);
   }
@@ -352,4 +352,79 @@ $("#form").submit(function (event) {
   swal("Carga Exitosa", "Se han cargado correctamente los datos.", "success");
 
   $("#form")[0].reset();
+});
+
+$(".info").prepend('<button id="btnInfo">+Info</button>');
+$(".info").prepend(` 
+                    <div id="div1" style="display: none">
+                    <div id= "table">
+                    <table class="paleBlueRows">
+                    <thead>
+                    <tr>
+                    <th>Doctor/a</th>
+                    <th>ID</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                    <td>Dra.Luciana R.</td>
+                    <td>0001</td>
+                    </tr>
+                    <tr>
+                    <td>Dr. Juan G.</td>
+                    <td>0002</td>
+                    </tr>
+                    <tr>
+                    <td>Dr. Fernando H.</td>
+                    <td>0003</td>
+                    </tr>
+                    <tr>
+                    <td>Dra. María L.</td>
+                    <td>0004</td>
+                    </tr>
+                    <tr>
+                    <td>Dra. Noelia P.</td>
+                    <td>0005</td>
+                    </tr>
+                    </tbody>
+                    </table>
+                    </div>
+                    </div>
+                `);
+$("#div1").prepend(
+  '<button id="btnHide">Haga click para ocultar información</button>'
+);
+$("#btnInfo").click(() => {
+  $("#div1").slideDown(3000, () => {});
+});
+
+$("#btnHide").click(() => {
+  $("#div1").slideUp(3000, () => {});
+});
+
+// GET A archivo-local.json
+
+const URL_ARCHIVO_JSON = "../db/data.json";
+
+$("#div1").prepend(
+  '<button id="btnGet"> GET Lista de Precios de Consultas</button>'
+);
+
+$("#btnGet").click(() => {
+  $.getJSON(URL_ARCHIVO_JSON, (response, status) => {
+    if (status === "success") {
+      let precios = response;
+
+      for (const precio of precios) {
+        $("#div1").prepend(
+          `
+      <div id="valores">
+        <h5>${precio.title}</h5>
+        <p>${precio.body}</p>
+      </div>
+      `
+        );
+      }
+    }
+  });
 });

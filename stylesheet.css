@@ -92,6 +92,102 @@
   list-style: url("https://img.icons8.com/ios/20/000000/ophthalmology.png");
 }
 
+#btnInfo {
+  width: 100%;
+  font-size: 30px;
+  cursor: pointer;
+  border: 2px;
+  border-radius: 5px;
+  background-color: #90aacb;
+}
+
+#btnHide {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 50%;
+  font-size: 30px;
+  cursor: pointer;
+  border: 2px;
+  border-radius: 5px;
+  background-color: #bbbfca;
+}
+
+#btnGet {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 50%;
+  font-size: 30px;
+  cursor: pointer;
+  border: 2px;
+  border-radius: 5px;
+  background-color: #f5a962;
+}
+
+#btnPost {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 50%;
+  font-size: 30px;
+  cursor: pointer;
+  border: 2px;
+  border-radius: 5px;
+  background-color: #f5a962;
+}
+
+#div1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#valores {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+  width: 100%;
+  font-size: 10px;
+}
+
+table.paleBlueRows {
+  font-family: "Times New Roman", Times, serif;
+  border: 1px solid #ffffff;
+  width: 350px;
+  height: 200px;
+  text-align: center;
+  border-collapse: collapse;
+}
+table.paleBlueRows td,
+table.paleBlueRows th {
+  border: 1px solid #ffffff;
+  padding: 3px 2px;
+}
+table.paleBlueRows tbody td {
+  font-size: 13px;
+}
+table.paleBlueRows tr:nth-child(even) {
+  background: #d0e4f5;
+}
+table.paleBlueRows thead {
+  background: #0b6fa4;
+  border-bottom: 5px solid #ffffff;
+}
+table.paleBlueRows thead th {
+  font-size: 17px;
+  font-weight: bold;
+  color: #ffffff;
+  text-align: center;
+  border-left: 2px solid #ffffff;
+}
+table.paleBlueRows thead th:first-child {
+  border-left: none;
+}
+
+table.paleBlueRows tfoot td {
+  font-size: 14px;
+}
+
 .footer {
   background-color: #495464;
   height: 20vh;
@@ -105,13 +201,4 @@
   font-size: 15px;
   text-align: center;
   color: #e8e8e8;
-}
-
-.btn-total {
-  width: 100%;
-  font-size: 30px;
-  cursor: pointer;
-  border: 2px;
-  border-radius: 5px;
-  background-color: #bbbfca;
 }
