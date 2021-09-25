@@ -38,7 +38,7 @@ class Fecha {
 class Medico {
   constructor(id, nombre) {
     this.id = id;
-    this.nombre = nombre.toUpperCase();
+    this.nombre = nombre;
   }
 }
 
@@ -46,7 +46,7 @@ class Paciente {
   constructor(id, nombre, apellido, telefono, email) {
     this.id = id;
     this.nombre = nombre;
-    this.apellido = apellido.toUpperCase();
+    this.apellido = apellido;
     this.telefono = telefono;
     this.email = email;
   }
@@ -235,20 +235,76 @@ $("#form").submit(function (event) {
   const fecha = new Fecha(date);
   localStorage.setItem("fecha", JSON.stringify(fecha));
 
-  const docId = $("#idMedico").val();
+  const docId = parseInt($("#idMedico").val(), 10);
+
+  if (!Number.isInteger(docId)) {
+    setTimeout(function () {
+      $("#idMedico").focus();
+    }, 1500);
+    return swal("Carga Incorrecta", "Se han cargado datos inválidos.", "error");
+  }
+
   const docNombre = $("#nombreMedico").val();
+
+  if (!/^[a-zA-Z\u00C0-\u00FF ]*$/.test(docNombre)) {
+    setTimeout(function () {
+      $("#nombreMedico").focus();
+    }, 1500);
+    return swal("Carga Incorrecta", "Se han cargado datos inválidos.", "error");
+  }
 
   const medico = new Medico(docId, docNombre);
   localStorage.setItem("medico", JSON.stringify(medico));
   arrayMedicos.push(medico);
 
-  const id = $("#idPaciente").val();
-  const nombre = $("#nombrePaciente").val();
-  const apellido = $("#apellidoPaciente").val();
-  const tel = $("#telPaciente").val();
-  const email = $("#emailPaciente").val();
+  const pacId = parseInt($("#idPaciente").val(), 10);
 
-  const paciente = new Paciente(id, nombre, apellido, tel, email);
+  if (!Number.isInteger(docId)) {
+    setTimeout(function () {
+      $("#idPaciente").focus();
+    }, 1500);
+    return swal("Carga Incorrecta", "Se han cargado datos inválidos.", "error");
+  }
+
+  const pacNombre = $("#nombrePaciente").val();
+
+  if (!/^[a-zA-Z\u00C0-\u00FF ]*$/.test(pacNombre)) {
+    setTimeout(function () {
+      $("#nombrePaciente").focus();
+    }, 1500);
+
+    return swal("Carga Incorrecta", "Se han cargado datos inválidos.", "error");
+  }
+
+  const pacApellido = $("#apellidoPaciente").val();
+
+  if (!/^[a-zA-Z\u00C0-\u00FF ]*$/.test(pacApellido)) {
+    setTimeout(function () {
+      $("#apellidoPaciente").focus();
+    }, 1500);
+    return swal("Carga Incorrecta", "Se han cargado datos inválidos.", "error");
+  }
+
+  const pacTel = $("#telPaciente").val();
+
+  const pacEmail = $("#emailPaciente").val();
+
+  /*if (
+    !/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(pacEmail)) {
+    setTimeout(function () {
+      $("#emailPaciente").focus();
+    }, 1500);
+    return swal("Carga Incorrecta", "Se han cargado datos inválidos.", "error");
+  }*/
+
+  const paciente = new Paciente(
+    pacId,
+    pacNombre,
+    pacApellido,
+    pacTel,
+    pacEmail
+  );
+
   localStorage.setItem("paciente", JSON.stringify(paciente));
   arrayPacientes.push(paciente);
 
@@ -277,8 +333,6 @@ $("#form").submit(function (event) {
   localStorage.setItem("consulta", JSON.stringify(consultaXPaciente));
   arrayConsultas.push(consultaXPaciente);
 
-  console.log("Total de mi consulta: $" + totalConsulta);
-
   console.log(arrayConsultas);
   console.log(arrayMedicos);
   console.log(arrayPacientes);
@@ -294,6 +348,8 @@ $("#form").submit(function (event) {
 
     listaPacientesFecha.append(itemConsulta);
   }
+
+  swal("Carga Exitosa", "Se han cargado correctamente los datos.", "success");
 
   $("#form")[0].reset();
 });
