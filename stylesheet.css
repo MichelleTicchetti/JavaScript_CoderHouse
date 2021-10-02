@@ -67,7 +67,7 @@
   cursor: pointer;
   border: 2px;
   border-radius: 5px;
-  background-color: #bbbfca;
+  background-color: #f5a962;
 }
 
 .history {
@@ -79,7 +79,7 @@
   font-size: 30px;
   text-align: center;
   padding: 10px;
-  background-color: #f5a962;
+  background-color: #bbbfca;
 }
 
 #listaPacientesFecha ul {
@@ -104,15 +104,106 @@
 #btnHide {
   margin-top: 10px;
   margin-bottom: 10px;
-  width: 50%;
+  padding: 5px;
+  width: 100%;
   font-size: 30px;
   cursor: pointer;
   border: 2px;
   border-radius: 5px;
-  background-color: #bbbfca;
+  background-color: #90aacb;
 }
 
-#btnGet {
+#divInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#tablas {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+#tableDr {
+  width: fit-content;
+  margin: 10px;
+}
+
+#tableConsultas {
+  width: fit-content;
+  margin: 10px;
+}
+
+#tableCirugias {
+  width: fit-content;
+  margin: 10px;
+}
+
+#tableEstudios {
+  width: fit-content;
+  margin: 10px;
+}
+
+#valores {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+  width: 100%;
+  font-size: 10px;
+}
+
+table.Rows {
+  font-family: "Times New Roman", Times, serif;
+  border: 1px solid #ffffff;
+  width: 350px;
+  height: 200px;
+  text-align: center;
+  border-collapse: collapse;
+}
+table.Rows td,
+table.Rows th {
+  border: 1px solid #ffffff;
+  padding: 3px 2px;
+}
+table.Rows tbody td {
+  font-size: 13px;
+}
+table.Rows tr:nth-child(even) {
+  background: #4954643b;
+}
+table.Rows thead {
+  background: #495464;
+  border-bottom: 5px solid #ffffff;
+}
+table.Rows thead th {
+  font-size: 17px;
+  font-weight: bold;
+  color: #ffffff;
+  text-align: center;
+  border-left: 2px solid #ffffff;
+}
+table.Rows thead th:first-child {
+  border-left: none;
+}
+
+table.Rows tfoot td {
+  font-size: 14px;
+}
+
+#btnGetPacientes {
+  width: 100%;
+  font-size: 30px;
+  cursor: pointer;
+  border: 2px;
+  border-radius: 5px;
+  background-color: #90aacb;
+}
+
+/*#btnGet {
   margin-top: 10px;
   margin-bottom: 10px;
   width: 50%;
@@ -133,60 +224,7 @@
   border-radius: 5px;
   background-color: #f5a962;
 }
-
-#div1 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-#valores {
-  text-align: center;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  padding: 10px;
-  width: 100%;
-  font-size: 10px;
-}
-
-table.paleBlueRows {
-  font-family: "Times New Roman", Times, serif;
-  border: 1px solid #ffffff;
-  width: 350px;
-  height: 200px;
-  text-align: center;
-  border-collapse: collapse;
-}
-table.paleBlueRows td,
-table.paleBlueRows th {
-  border: 1px solid #ffffff;
-  padding: 3px 2px;
-}
-table.paleBlueRows tbody td {
-  font-size: 13px;
-}
-table.paleBlueRows tr:nth-child(even) {
-  background: #d0e4f5;
-}
-table.paleBlueRows thead {
-  background: #0b6fa4;
-  border-bottom: 5px solid #ffffff;
-}
-table.paleBlueRows thead th {
-  font-size: 17px;
-  font-weight: bold;
-  color: #ffffff;
-  text-align: center;
-  border-left: 2px solid #ffffff;
-}
-table.paleBlueRows thead th:first-child {
-  border-left: none;
-}
-
-table.paleBlueRows tfoot td {
-  font-size: 14px;
-}
+*/
 
 .footer {
   background-color: #495464;

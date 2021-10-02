@@ -1,6 +1,6 @@
 //Valores Tipo de Consulta
-const CONS_PART = 1500;
-const CONS_PREPA = 300;
+const CONS_PART = 2500;
+const CONS_PREPA = 400;
 const CONS_OBRASOC = 250;
 const CONS_PAMI = 500;
 const CONS_PLANSALUD = 0;
@@ -233,6 +233,8 @@ $("#form").submit(function (event) {
 
   const date = $("#fecha").val();
   const fecha = new Fecha(date);
+  console.log(fecha);
+
   localStorage.setItem("fecha", JSON.stringify(fecha));
 
   const docId = parseInt($("#idMedico").val(), 10);
@@ -241,7 +243,7 @@ $("#form").submit(function (event) {
     setTimeout(function () {
       $("#idMedico").focus();
     }, 1500);
-    return swal("Carga Incorrecta", "Se han cargado datos inválidos.", "error");
+    return swal("Carga Incorrecta", "El ID de Médico es incorrecto", "error");
   }
 
   const docNombre = $("#nombreMedico").val();
@@ -250,7 +252,11 @@ $("#form").submit(function (event) {
     setTimeout(function () {
       $("#nombreMedico").focus();
     }, 1500);
-    return swal("Carga Incorrecta", "Se han cargado datos inválidos.", "error");
+    return swal(
+      "Carga Incorrecta",
+      "El nombre del Médico es incorrecto",
+      "error"
+    );
   }
 
   const medico = new Medico(docId, docNombre);
@@ -263,7 +269,11 @@ $("#form").submit(function (event) {
     setTimeout(function () {
       $("#idPaciente").focus();
     }, 1500);
-    return swal("Carga Incorrecta", "Se han cargado datos inválidos.", "error");
+    return swal(
+      "Carga Incorrecta",
+      "El ID del Paciente es incorrecto",
+      "error"
+    );
   }
 
   const pacNombre = $("#nombrePaciente").val();
@@ -273,7 +283,11 @@ $("#form").submit(function (event) {
       $("#nombrePaciente").focus();
     }, 1500);
 
-    return swal("Carga Incorrecta", "Se han cargado datos inválidos.", "error");
+    return swal(
+      "Carga Incorrecta",
+      "El nombre del Paciente es incorrecto",
+      "error"
+    );
   }
 
   const pacApellido = $("#apellidoPaciente").val();
@@ -282,7 +296,11 @@ $("#form").submit(function (event) {
     setTimeout(function () {
       $("#apellidoPaciente").focus();
     }, 1500);
-    return swal("Carga Incorrecta", "Se han cargado datos inválidos.", "error");
+    return swal(
+      "Carga Incorrecta",
+      "El apellido del Paciente es incorrecto",
+      "error"
+    );
   }
 
   const pacTel = $("#telPaciente").val();
@@ -344,7 +362,7 @@ $("#form").submit(function (event) {
   function mostrarConsultas(d, m, p, c) {
     let itemConsulta = document.createElement("li");
 
-    itemConsulta.textContent = `Fecha: ${d}, Medico: [ID]${m.id}, ${m.nombre}. Paciente: ${p.apellido}, ${p.nombre}. Descripción: [Consulta] ${c.consulta}, [Estudio] ${c.estudio}, [Cirugía] ${c.cirugia}. TOTAL: $ ${c.totalConsulta}`;
+    itemConsulta.textContent = `Fecha: ${d}, Medico: ${m.nombre}. Paciente: ${p.apellido}, ${p.nombre}. Consulta: ${c.consulta}, Estudio: ${c.estudio}, Cirugía: ${c.cirugia}. TOTAL: $ ${c.totalConsulta}`;
 
     listaPacientesFecha.append(itemConsulta);
   }
@@ -356,75 +374,224 @@ $("#form").submit(function (event) {
 
 $(".info").prepend('<button id="btnInfo">+Info</button>');
 $(".info").prepend(` 
-                    <div id="div1" style="display: none">
-                    <div id= "table">
-                    <table class="paleBlueRows">
+                    <div id="divInfo" style="display: none">
+                    <div id= "infoBtnHide"></div>
+                    <div id= "tablas">
+                    <div id= "tableDr">
+                    <table class="Rows">
                     <thead>
                     <tr>
                     <th>Doctor/a</th>
                     <th>ID</th>
+                    <th>Especialidad</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
-                    <td>Dra.Luciana R.</td>
+                    <td>Dra. Luciana R.</td>
                     <td>0001</td>
+                    <td>Retina y Glaucoma</td>
                     </tr>
                     <tr>
                     <td>Dr. Juan G.</td>
                     <td>0002</td>
+                    <td>Retina</td>
                     </tr>
                     <tr>
                     <td>Dr. Fernando H.</td>
                     <td>0003</td>
+                    <td>Plástica</td>
                     </tr>
                     <tr>
                     <td>Dra. María L.</td>
                     <td>0004</td>
+                    <td>Córnea</td>
                     </tr>
                     <tr>
                     <td>Dra. Noelia P.</td>
                     <td>0005</td>
+                    <td>Neurooftalmología</td>
+                    </tr>
+                    </tbody>
+                    </table>
+                    </div>
+                    <div id= "tableConsultas">
+                    <table class="Rows">
+                    <thead>
+                    <tr>
+                    <th>Consulta</th>
+                    <th>Valor</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                    <td>Plan de Salud</td>
+                    <td>$${CONS_PLANSALUD}</td>
+                    </tr>
+                    <tr>
+                    <td>Particular</td>
+                    <td>$${CONS_PART}</td>
+                    </tr>
+                    <tr>
+                    <td>Prepaga</td>
+                    <td>$${CONS_PREPA}</td>
+                    </tr>
+                    <tr>
+                    <td>PAMI</td>
+                    <td>$${CONS_PAMI}</td>
+                    </tr>
+                    <tr>
+                    <td>Obra Social</td>
+                    <td>$${CONS_OBRASOC}</td>
+                    </tr>
+                    </tbody>
+                    </table>
+                    </div>
+                    <div id= "tableEstudios">
+                    <table class="Rows">
+                    <thead>
+                    <tr>
+                    <th>Estudio</th>
+                    <th>Valor</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                    <td>Campo Visual Computarizado</td>
+                    <td>$${EST_CAMPOVIS}</td>
+                    </tr>
+                    <tr>
+                    <td>Interferometría (Test de Lotmar, PAM)</td>
+                    <td>$${EST_INTERFER}</td>
+                    </tr>
+                    <tr>
+                    <td>Capsulotomía con Yag</td>
+                    <td>$${EST_CAPSULYAG}</td>
+                    </tr>
+                    <tr>
+                    <td>Ecometría</td>
+                    <td>$${EST_ECOMET}</td>
+                    </tr>
+                    <tr>
+                    <td>Ecografía</td>
+                    <td>$${EST_ECO}</td>
+                    </tr>
+                    <tr>
+                    <td>Láser, crío, diatermia de baja complejidad</td>
+                    <td>$${EST_LASER}</td>
+                    </tr>
+                    <tr>
+                    <td>Paquimetría</td>
+                    <td>$${EST_PAQUIM}</td>
+                    </tr>
+                    <tr>
+                    <td>OCT</td>
+                    <td>$${EST_OCT}</td>
+                    </tr>
+                    <tr>
+                    <td>Tomografía confocal del nervio óptico</td>
+                    <td>$${EST_TOMONERVOPT}</td>
+                    </tr>
+                    <tr>
+                    <td>Tomografía corneal</td>
+                    <td>$${EST_TOMOCORN}</td>
+                    </tr>
+                    <tr>
+                    <td>UBM</td>
+                    <td>$${EST_UBM}</td>
+                    </tr>
+                    </tbody>
+                    </table>
+                    </div>
+                    <div id= "tableCirugias">
+                    <table class="Rows">
+                    <thead>
+                    <tr>
+                    <th>Cirugía</th>
+                    <th>Valor</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                    <td>Refractiva</td>
+                    <td>$${CIR_REFRA}</td>
+                    </tr>
+                    <tr>
+                    <td>Facoemulsificación</td>
+                    <td>$${CIR_FACOEMU}</td>
+                    </tr>
+                    <tr>
+                    <td>Vitrectomía</td>
+                    <td>$${CIR_VITRE}</td>
+                    </tr>
+                    <tr>
+                    <td>Trabeculectomia</td>
+                    <td>$${CIR_TRABE}</td>
+                    </tr>
+                    <tr>
+                    <td>Aplicación Intravítrea de Antiangiogénicos</td>
+                    <td>$${CIR_AAG}</td>
+                    </tr>
+                    <tr>
+                    <td>Membrana epiretinal</td>
+                    <td>$${CIR_MER}</td>
+                    </tr>
+                    <tr>
+                    <td>Blefaroplastia</td>
+                    <td>$${CIR_BLEFA}</td>
+                    </tr>
+                    <tr>
+                    <td>Ptosis palpebral</td>
+                    <td>$${CIR_PTOSIS}</td>
+                    </tr>
+                    <tr>
+                    <td>FacoVitrectomía</td>
+                    <td>$${CIR_FACOVITRE}</td>
                     </tr>
                     </tbody>
                     </table>
                     </div>
                     </div>
+                    </div>
                 `);
-$("#div1").prepend(
-  '<button id="btnHide">Haga click para ocultar información</button>'
-);
+$("#infoBtnHide").prepend('<button id="btnHide">Ocultar información</button>');
 $("#btnInfo").click(() => {
-  $("#div1").slideDown(3000, () => {});
+  $("#divInfo").slideDown(3000, () => {});
 });
 
 $("#btnHide").click(() => {
-  $("#div1").slideUp(3000, () => {});
+  $("#divInfo").slideUp(3000, () => {});
 });
+/////
 
-// GET A archivo-local.json
+const URL = "http://localhost:3000/pacientes";
 
-const URL_ARCHIVO_JSON = "../db/data.json";
-
-$("#div1").prepend(
-  '<button id="btnGet"> GET Lista de Precios de Consultas</button>'
+// GET Server
+$(".getPost").prepend(
+  '<button id="btnGetPacientes"> Listar Pacientes</button>'
 );
 
-$("#btnGet").click(() => {
-  $.getJSON(URL_ARCHIVO_JSON, (response, status) => {
+$("#btnGetPacientes").click(() => {
+  $.getJSON(URL, (response, status) => {
     if (status === "success") {
-      let precios = response;
+      let listaPac = response;
 
-      for (const precio of precios) {
-        $("#div1").prepend(
-          `
-      <div id="valores">
-        <h5>${precio.title}</h5>
-        <p>${precio.body}</p>
-      </div>
-      `
+      for (const p of listaPac) {
+        $(".getPostTable").prepend(
+          ` 
+          
+          <tr>
+                    <td><span style="font-weight: bold">PACIENTE:</span> ${p.fullname}</td>
+                    <td><span style="font-weight: bold">ID ${p.id} </span></td>
+          </tr>
+                
+          
+          
+              `
         );
       }
+
+      console.log(response);
     }
   });
 });
