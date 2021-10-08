@@ -373,188 +373,190 @@ $("#form").submit(function (event) {
 });
 
 $(".info").prepend('<button id="btnInfo">+Info</button>');
-$(".info").prepend(` 
-                    <div id="divInfo" style="display: none">
-                    <div id= "infoBtnHide"></div>
-                    <div id= "tablas">
-                    <div id= "tableDr">
-                    <table class="Rows">
-                    <thead>
-                    <tr>
-                    <th>Doctor/a</th>
-                    <th>ID</th>
-                    <th>Especialidad</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                    <td>Dra. Luciana R.</td>
-                    <td>0001</td>
-                    <td>Retina y Glaucoma</td>
-                    </tr>
-                    <tr>
-                    <td>Dr. Juan G.</td>
-                    <td>0002</td>
-                    <td>Retina</td>
-                    </tr>
-                    <tr>
-                    <td>Dr. Fernando H.</td>
-                    <td>0003</td>
-                    <td>Plástica</td>
-                    </tr>
-                    <tr>
-                    <td>Dra. María L.</td>
-                    <td>0004</td>
-                    <td>Córnea</td>
-                    </tr>
-                    <tr>
-                    <td>Dra. Noelia P.</td>
-                    <td>0005</td>
-                    <td>Neurooftalmología</td>
-                    </tr>
-                    </tbody>
-                    </table>
-                    </div>
-                    <div id= "tableConsultas">
-                    <table class="Rows">
-                    <thead>
-                    <tr>
-                    <th>Consulta</th>
-                    <th>Valor</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                    <td>Plan de Salud</td>
-                    <td>$${CONS_PLANSALUD}</td>
-                    </tr>
-                    <tr>
-                    <td>Particular</td>
-                    <td>$${CONS_PART}</td>
-                    </tr>
-                    <tr>
-                    <td>Prepaga</td>
-                    <td>$${CONS_PREPA}</td>
-                    </tr>
-                    <tr>
-                    <td>PAMI</td>
-                    <td>$${CONS_PAMI}</td>
-                    </tr>
-                    <tr>
-                    <td>Obra Social</td>
-                    <td>$${CONS_OBRASOC}</td>
-                    </tr>
-                    </tbody>
-                    </table>
-                    </div>
-                    <div id= "tableEstudios">
-                    <table class="Rows">
-                    <thead>
-                    <tr>
-                    <th>Estudio</th>
-                    <th>Valor</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                    <td>Campo Visual Computarizado</td>
-                    <td>$${EST_CAMPOVIS}</td>
-                    </tr>
-                    <tr>
-                    <td>Interferometría (Test de Lotmar, PAM)</td>
-                    <td>$${EST_INTERFER}</td>
-                    </tr>
-                    <tr>
-                    <td>Capsulotomía con Yag</td>
-                    <td>$${EST_CAPSULYAG}</td>
-                    </tr>
-                    <tr>
-                    <td>Ecometría</td>
-                    <td>$${EST_ECOMET}</td>
-                    </tr>
-                    <tr>
-                    <td>Ecografía</td>
-                    <td>$${EST_ECO}</td>
-                    </tr>
-                    <tr>
-                    <td>Láser, crío, diatermia de baja complejidad</td>
-                    <td>$${EST_LASER}</td>
-                    </tr>
-                    <tr>
-                    <td>Paquimetría</td>
-                    <td>$${EST_PAQUIM}</td>
-                    </tr>
-                    <tr>
-                    <td>OCT</td>
-                    <td>$${EST_OCT}</td>
-                    </tr>
-                    <tr>
-                    <td>Tomografía confocal del nervio óptico</td>
-                    <td>$${EST_TOMONERVOPT}</td>
-                    </tr>
-                    <tr>
-                    <td>Tomografía corneal</td>
-                    <td>$${EST_TOMOCORN}</td>
-                    </tr>
-                    <tr>
-                    <td>UBM</td>
-                    <td>$${EST_UBM}</td>
-                    </tr>
-                    </tbody>
-                    </table>
-                    </div>
-                    <div id= "tableCirugias">
-                    <table class="Rows">
-                    <thead>
-                    <tr>
-                    <th>Cirugía</th>
-                    <th>Valor</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                    <td>Refractiva</td>
-                    <td>$${CIR_REFRA}</td>
-                    </tr>
-                    <tr>
-                    <td>Facoemulsificación</td>
-                    <td>$${CIR_FACOEMU}</td>
-                    </tr>
-                    <tr>
-                    <td>Vitrectomía</td>
-                    <td>$${CIR_VITRE}</td>
-                    </tr>
-                    <tr>
-                    <td>Trabeculectomia</td>
-                    <td>$${CIR_TRABE}</td>
-                    </tr>
-                    <tr>
-                    <td>Aplicación Intravítrea de Antiangiogénicos</td>
-                    <td>$${CIR_AAG}</td>
-                    </tr>
-                    <tr>
-                    <td>Membrana epiretinal</td>
-                    <td>$${CIR_MER}</td>
-                    </tr>
-                    <tr>
-                    <td>Blefaroplastia</td>
-                    <td>$${CIR_BLEFA}</td>
-                    </tr>
-                    <tr>
-                    <td>Ptosis palpebral</td>
-                    <td>$${CIR_PTOSIS}</td>
-                    </tr>
-                    <tr>
-                    <td>FacoVitrectomía</td>
-                    <td>$${CIR_FACOVITRE}</td>
-                    </tr>
-                    </tbody>
-                    </table>
-                    </div>
-                    </div>
-                    </div>
+$(".info-tablas").prepend(` 
+<div id="divInfo" style="display: none">
+<div id="infoBtnHide"></div>
+<div class="tablas-container">
+  <div id="tableDr">
+    <table class="Rows">
+      <thead>
+        <tr>
+          <th>Doctor/a</th>
+          <th>ID</th>
+          <th>Especialidad</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Dra. Luciana R.</td>
+          <td>0001</td>
+          <td>Retina y Glaucoma</td>
+        </tr>
+        <tr>
+          <td>Dr. Juan G.</td>
+          <td>0002</td>
+          <td>Retina</td>
+        </tr>
+        <tr>
+          <td>Dr. Fernando H.</td>
+          <td>0003</td>
+          <td>Plástica</td>
+        </tr>
+        <tr>
+          <td>Dra. María L.</td>
+          <td>0004</td>
+          <td>Córnea</td>
+        </tr>
+        <tr>
+          <td>Dra. Noelia P.</td>
+          <td>0005</td>
+          <td>Neurooftalmología</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div id="tableConsultas">
+    <table class="Rows">
+      <thead>
+        <tr>
+          <th>Consulta</th>
+          <th>Valor</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Plan de Salud</td>
+          <td>$${CONS_PLANSALUD}</td>
+        </tr>
+        <tr>
+          <td>Particular</td>
+          <td>$${CONS_PART}</td>
+        </tr>
+        <tr>
+          <td>Prepaga</td>
+          <td>$${CONS_PREPA}</td>
+        </tr>
+        <tr>
+          <td>PAMI</td>
+          <td>$${CONS_PAMI}</td>
+        </tr>
+        <tr>
+          <td>Obra Social</td>
+          <td>$${CONS_OBRASOC}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div id="tableEstudios">
+    <table class="Rows">
+      <thead>
+        <tr>
+          <th>Estudio</th>
+          <th>Valor</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Campo Visual Computarizado</td>
+          <td>$${EST_CAMPOVIS}</td>
+        </tr>
+        <tr>
+          <td>Interferometría (Test de Lotmar, PAM)</td>
+          <td>$${EST_INTERFER}</td>
+        </tr>
+        <tr>
+          <td>Capsulotomía con Yag</td>
+          <td>$${EST_CAPSULYAG}</td>
+        </tr>
+        <tr>
+          <td>Ecometría</td>
+          <td>$${EST_ECOMET}</td>
+        </tr>
+        <tr>
+          <td>Ecografía</td>
+          <td>$${EST_ECO}</td>
+        </tr>
+        <tr>
+          <td>Láser, crío, diatermia de baja complejidad</td>
+          <td>$${EST_LASER}</td>
+        </tr>
+        <tr>
+          <td>Paquimetría</td>
+          <td>$${EST_PAQUIM}</td>
+        </tr>
+        <tr>
+          <td>OCT</td>
+          <td>$${EST_OCT}</td>
+        </tr>
+        <tr>
+          <td>Tomografía confocal del nervio óptico</td>
+          <td>$${EST_TOMONERVOPT}</td>
+        </tr>
+        <tr>
+          <td>Tomografía corneal</td>
+          <td>$${EST_TOMOCORN}</td>
+        </tr>
+        <tr>
+          <td>UBM</td>
+          <td>$${EST_UBM}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div id="tableCirugias">
+    <table class="Rows">
+      <thead>
+        <tr>
+          <th>Cirugía</th>
+          <th>Valor</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Refractiva</td>
+          <td>$${CIR_REFRA}</td>
+        </tr>
+        <tr>
+          <td>Facoemulsificación</td>
+          <td>$${CIR_FACOEMU}</td>
+        </tr>
+        <tr>
+          <td>Vitrectomía</td>
+          <td>$${CIR_VITRE}</td>
+        </tr>
+        <tr>
+          <td>Trabeculectomia</td>
+          <td>$${CIR_TRABE}</td>
+        </tr>
+        <tr>
+          <td>Aplicación Intravítrea de Antiangiogénicos</td>
+          <td>$${CIR_AAG}</td>
+        </tr>
+        <tr>
+          <td>Membrana epiretinal</td>
+          <td>$${CIR_MER}</td>
+        </tr>
+        <tr>
+          <td>Blefaroplastia</td>
+          <td>$${CIR_BLEFA}</td>
+        </tr>
+        <tr>
+          <td>Ptosis palpebral</td>
+          <td>$${CIR_PTOSIS}</td>
+        </tr>
+        <tr>
+          <td>FacoVitrectomía</td>
+          <td>$${CIR_FACOVITRE}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>
+
+
                 `);
-$("#infoBtnHide").prepend('<button id="btnHide">Ocultar información</button>');
+$("#infoBtnHide").prepend('<button id="btnHide">- Info</button>');
 $("#btnInfo").click(() => {
   $("#divInfo").slideDown(3000, () => {});
 });

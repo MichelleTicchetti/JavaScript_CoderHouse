@@ -24,172 +24,170 @@
       <h1 class="titulo">Registro de Facturación de Consulta Oftalmológica</h1>
     </header>
     <main class="main">
-      <div class="row">
-        <div class="info"></div>
-        <div class="col-12 main-div">
-          <form class="formulario" id="form">
-            <div>
-              <div class="formulario-metadata">
-                <label for="exampleFormControlInput1" class="form-label" id=""
-                  ><h2>Fecha</h2></label
-                >
-                <input
-                  autocomplete="off"
-                  type="date"
-                  class="form-control"
-                  id="fecha"
-                  required
-                />
-                <label for="exampleFormControlInput1" class="form-label" id=""
-                  ><h2>ID Médico</h2></label
-                >
-                <input
-                  autocomplete="off"
-                  type="text"
-                  class="form-control"
-                  id="idMedico"
-                  required
-                />
-                <label for="exampleFormControlInput1" class="form-label" id=""
-                  ><h2>Nombre Médico</h2></label
-                >
-                <input
-                  autocomplete="off"
-                  type="text"
-                  class="form-control"
-                  id="nombreMedico"
-                  required
-                />
-              </div>
-            </div>
-            <div class="formulario-p">
+      <div class="info">
+        <div class="info-tablas"></div>
+      </div>
+      <div class="main-div">
+        <form class="formulario" id="form">
+          <div>
+            <div class="formulario-metadata">
               <label for="exampleFormControlInput1" class="form-label" id=""
-                ><h2>ID Paciente</h2></label
+                ><h2>Fecha</h2></label
               >
               <input
                 autocomplete="off"
-                type="text"
+                type="date"
                 class="form-control"
-                id="idPaciente"
+                id="fecha"
                 required
               />
               <label for="exampleFormControlInput1" class="form-label" id=""
-                ><h2>Nombre Paciente</h2></label
+                ><h2>ID Médico</h2></label
               >
               <input
                 autocomplete="off"
                 type="text"
                 class="form-control"
-                id="nombrePaciente"
+                id="idMedico"
                 required
               />
               <label for="exampleFormControlInput1" class="form-label" id=""
-                ><h2>Apellido Paciente</h2></label
+                ><h2>Nombre Médico</h2></label
               >
               <input
                 autocomplete="off"
                 type="text"
                 class="form-control"
-                id="apellidoPaciente"
+                id="nombreMedico"
                 required
               />
-              <label for="exampleFormControlInput1" class="form-label" id=""
-                ><h2>Teléfono Paciente</h2></label
-              >
-              <input
-                autocomplete="off"
-                type="text"
-                class="form-control"
-                id="telPaciente"
-              />
-              <label for="exampleFormControlInput1" class="form-label" id=""
-                ><h2>Email Paciente</h2></label
-              >
-              <input
-                autocomplete="off"
-                type="text"
-                class="form-control"
-                id="emailPaciente"
-              />
             </div>
-            <div class="formulario-p">
-              <h2>Tipo de Consulta</h2>
-              <select
-                id="consulta"
-                class="form-select"
-                onchange="getSelectedConsulta();"
-              >
-                <option value="null">--</option>
-                <option value="Particular">Particular</option>
-                <option value="Prepaga">Prepaga</option>
-                <option value="Obra Social">Obra Social</option>
-                <option value="PAMI">PAMI</option>
-                <option value="Plan de Salud">Plan de Salud</option>
-              </select>
-            </div>
-            <div class="formulario-p">
-              <h2>Estudio</h2>
-              <select
-                id="estudio"
-                class="form-select"
-                onchange="getSelectedEstudio();"
-              >
-                <option value="null">--</option>
-                <option value="Campo Visual Computarizado">
-                  Campo Visual Computarizado
-                </option>
-                <option value="Interferometria">
-                  Interferometría (Test de Lotmar, PAM)
-                </option>
-                <option value="Capsulotomia con Yag">
-                  Capsulotomía con Yag
-                </option>
-                <option value="Ecometria">Ecometría</option>
-                <option value="Ecografia">Ecografía</option>
-                <option value="Laser">
-                  Láser, crío, diatermia de baja complejidad
-                </option>
-                <option value="Paquimetria">Paquimetría</option>
-                <option value="OCT">OCT</option>
-                <option value="Tomografia Nervio Optico">
-                  Tomografía confocal del nervio óptico
-                </option>
-                <option value="Tomografia Corneal">Tomografía corneal</option>
-                <option value="UBM">UBM</option>
-              </select>
-            </div>
-            <div class="formulario-p">
-              <h2>Cirugía</h2>
-              <select
-                id="cirugia"
-                class="form-select"
-                onchange="getSelectedCirugia();"
-              >
-                <option value="null">--</option>
-                <option value="Refractiva">Refractiva</option>
-                <option value="Facoemulsificacion">Facoemulsificación</option>
-                <option value="Vitrectomia">Vitrectomía</option>
-                <option value="Trabeculotomia">Trabeculectomia</option>
-                <option value="AAG">
-                  Aplicación Intravítrea de Antiangiogénicos
-                </option>
-                <option value="MER">Membrana epiretinal</option>
-                <option value="Blefaroplastia">Blefaroplastia</option>
-                <option value="Ptosis Palpebral">Ptosis palpebral</option>
-                <option value="Facovitrectomia">FacoVitrectomía</option>
-              </select>
-            </div>
-            <div class="formulario-btn">
-              <button type="submit" class="btn-formulario" id="btnSubmit">
-                Enviar
-              </button>
-            </div>
-          </form>
-        </div>
-        <div class="history">
-          <h2>Consultas de Hoy</h2>
-          <ul id="listaPacientesFecha"></ul>
-        </div>
+          </div>
+          <div class="formulario-p">
+            <label for="exampleFormControlInput1" class="form-label" id=""
+              ><h2>ID Paciente</h2></label
+            >
+            <input
+              autocomplete="off"
+              type="text"
+              class="form-control"
+              id="idPaciente"
+              required
+            />
+            <label for="exampleFormControlInput1" class="form-label" id=""
+              ><h2>Nombre Paciente</h2></label
+            >
+            <input
+              autocomplete="off"
+              type="text"
+              class="form-control"
+              id="nombrePaciente"
+              required
+            />
+            <label for="exampleFormControlInput1" class="form-label" id=""
+              ><h2>Apellido Paciente</h2></label
+            >
+            <input
+              autocomplete="off"
+              type="text"
+              class="form-control"
+              id="apellidoPaciente"
+              required
+            />
+            <label for="exampleFormControlInput1" class="form-label" id=""
+              ><h2>Teléfono Paciente</h2></label
+            >
+            <input
+              autocomplete="off"
+              type="text"
+              class="form-control"
+              id="telPaciente"
+            />
+            <label for="exampleFormControlInput1" class="form-label" id=""
+              ><h2>Email Paciente</h2></label
+            >
+            <input
+              autocomplete="off"
+              type="text"
+              class="form-control"
+              id="emailPaciente"
+            />
+          </div>
+          <div class="formulario-p">
+            <h2>Tipo de Consulta</h2>
+            <select
+              id="consulta"
+              class="form-select"
+              onchange="getSelectedConsulta();"
+            >
+              <option value="null">--</option>
+              <option value="Particular">Particular</option>
+              <option value="Prepaga">Prepaga</option>
+              <option value="Obra Social">Obra Social</option>
+              <option value="PAMI">PAMI</option>
+              <option value="Plan de Salud">Plan de Salud</option>
+            </select>
+          </div>
+          <div class="formulario-p">
+            <h2>Estudio</h2>
+            <select
+              id="estudio"
+              class="form-select"
+              onchange="getSelectedEstudio();"
+            >
+              <option value="null">--</option>
+              <option value="Campo Visual Computarizado">
+                Campo Visual Computarizado
+              </option>
+              <option value="Interferometria">
+                Interferometría (Test de Lotmar, PAM)
+              </option>
+              <option value="Capsulotomia con Yag">Capsulotomía con Yag</option>
+              <option value="Ecometria">Ecometría</option>
+              <option value="Ecografia">Ecografía</option>
+              <option value="Laser">
+                Láser, crío, diatermia de baja complejidad
+              </option>
+              <option value="Paquimetria">Paquimetría</option>
+              <option value="OCT">OCT</option>
+              <option value="Tomografia Nervio Optico">
+                Tomografía confocal del nervio óptico
+              </option>
+              <option value="Tomografia Corneal">Tomografía corneal</option>
+              <option value="UBM">UBM</option>
+            </select>
+          </div>
+          <div class="formulario-p">
+            <h2>Cirugía</h2>
+            <select
+              id="cirugia"
+              class="form-select"
+              onchange="getSelectedCirugia();"
+            >
+              <option value="null">--</option>
+              <option value="Refractiva">Refractiva</option>
+              <option value="Facoemulsificacion">Facoemulsificación</option>
+              <option value="Vitrectomia">Vitrectomía</option>
+              <option value="Trabeculotomia">Trabeculectomia</option>
+              <option value="AAG">
+                Aplicación Intravítrea de Antiangiogénicos
+              </option>
+              <option value="MER">Membrana epiretinal</option>
+              <option value="Blefaroplastia">Blefaroplastia</option>
+              <option value="Ptosis Palpebral">Ptosis palpebral</option>
+              <option value="Facovitrectomia">FacoVitrectomía</option>
+            </select>
+          </div>
+          <div class="formulario-btn">
+            <button type="submit" class="btn-formulario" id="btnSubmit">
+              Enviar
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="history">
+        <h2>Consultas de Hoy</h2>
+        <ul id="listaPacientesFecha"></ul>
       </div>
       <div class="getPost">
         <table class="getPostTable"></table>
